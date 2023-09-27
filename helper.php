@@ -122,3 +122,70 @@ if (!function_exists('formatCounted')) {
         }
     }
 }
+
+if (!function_exists('generateRandomString')) {
+    function generateRandomString($id, $length = 6, $timestamp = true): string
+    {
+        $timestamp = time();
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $randomString = '';
+        $charactersLength = strlen($characters);
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        if ($timestamp) {
+            return $id . $timestamp . $randomString;
+        } else {
+            return $randomString;
+        }
+    }
+}
+
+if (!function_exists('generateSlug')) {
+    function generateSlug($title): array|string|null
+    {
+        // Menghapus karakter-karakter yang tidak diinginkan
+        $slug = preg_replace('/[^a-z0-9-]+/', '-', strtolower($title));
+
+        // Menghapus tanda strip di awal dan akhir slug
+        $slug = trim($slug, '-');
+
+        // Mengganti beberapa strip berturut-turut dengan satu strip
+        $slug = preg_replace('/-+/', '-', $slug);
+
+        return $slug;
+    }
+}
+
+if (!function_exists('formatTime')) {
+    function formatTime($duration)
+    {
+        $hours = floor($duration / 3600);
+        $minutes = floor(($duration % 3600) / 60);
+        $seconds = $duration % 60;
+
+        $formattedTime = str_pad($hours, 2, '0', STR_PAD_LEFT) . ':' .
+            str_pad($minutes, 2, '0', STR_PAD_LEFT) . ':' .
+            str_pad($seconds, 2, '0', STR_PAD_LEFT);
+
+        return $formattedTime;
+    }
+}
+
+if (!function_exists('convertToAlphabet')) {
+    function convertToAlphabet($number)
+    {
+        $alphabet = range('A', 'Z');
+        $result = '';
+
+        while ($number > 0) {
+            $remainder = ($number - 1) % 26;
+            $result = $alphabet[$remainder] . $result;
+            $number = intval(($number - $remainder) / 26);
+        }
+
+        return $result;
+    }
+}
