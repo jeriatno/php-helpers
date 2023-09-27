@@ -14,3 +14,18 @@
    }
 
 3. Run "composer dump-autoload"
+
+
+# Helper list :
+
+- formatCurrency
+- formatNumber
+- parseDateRange
+- getMonthName
+- pathLast
+- formatDate
+- formatCounted
+- generateRandomString
+- generateSlug
+- formatTime
+- convertToAlphabet
